@@ -78,7 +78,7 @@ export default function SiteDetailPage({ params }: { params: Promise<{ id: strin
       : 'bg-emerald-950/40 border-emerald-500/60 status-glow-normal text-emerald-300';
 
   return (
-    <div className="min-h-screen bg-[#070a11] text-slate-100 flex flex-col font-sans">
+    <div className="min-h-screen bg-transparent text-slate-100 flex flex-col font-sans">
       <Navbar />
 
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 lg:px-8 py-8 space-y-8">

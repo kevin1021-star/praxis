@@ -45,7 +45,7 @@ export default function FleetOverviewPage() {
   const warningCount = sites.filter((s) => s.latestReading?.status === 'WARNING').length;
 
   return (
-    <div className="min-h-screen bg-[#050811] text-slate-100 flex flex-col font-sans">
+    <div className="min-h-screen bg-transparent text-slate-100 flex flex-col font-sans">
       <Navbar />
 
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 lg:px-8 py-8 space-y-8">
