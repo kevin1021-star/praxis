@@ -7,7 +7,7 @@ import { Navbar } from '@/components/Navbar';
 import { SparklineChart } from '@/components/SparklineChart';
 import { FleetMapView } from '@/components/FleetMapView';
 import { AnimatedCounter } from '@/components/AnimatedCounter';
-import { calculateBatterySoC } from '@/lib/analytics';
+import { calculateBatterySoC, calculateBatterySoH, calculateFleetFinancialImpact } from '@/lib/analytics';
 import { 
   Zap, 
   Activity, 
@@ -26,7 +26,10 @@ import {
   Map,
   ShieldCheck,
   Cpu,
-  Radio
+  Radio,
+  Coins,
+  Leaf,
+  Award
 } from 'lucide-react';
 
 export default function FleetOverviewPage() {
@@ -43,6 +46,9 @@ export default function FleetOverviewPage() {
   const activeSitesCount = sites.length;
   const faultCount = sites.filter((s) => s.latestReading?.status === 'FAULT').length;
   const warningCount = sites.filter((s) => s.latestReading?.status === 'WARNING').length;
+
+  // Financial ROI & CO2 impact calculations
+  const financialImpact = calculateFleetFinancialImpact(activeSitesCount, totalFleetPower);
 
   return (
     <div className="min-h-screen bg-transparent text-slate-100 flex flex-col font-sans">
@@ -115,6 +121,45 @@ export default function FleetOverviewPage() {
           </div>
         </div>
 
+        {/* FINANCIAL ROI & ENVIRONMENTAL CARBON OFFSET SUMMARY BAR */}
+        <div className="glass-panel p-4 rounded-2xl border border-emerald-500/30 bg-emerald-950/15 flex flex-col md:flex-row items-center justify-between gap-4 font-mono">
+          <div className="flex items-center space-x-3">
+            <div className="p-2.5 rounded-xl bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+              <Coins className="w-5 h-5" />
+            </div>
+            <div>
+              <span className="text-[10px] text-slate-400 uppercase tracking-wider block">Est. Monthly Diesel Savings</span>
+              <span className="text-xl font-bold text-emerald-400">
+                ₹{financialImpact.monthlyRupeesSaved.toLocaleString()} / mo
+              </span>
+            </div>
+          </div>
+
+          <div className="flex items-center space-x-3 border-t md:border-t-0 md:border-l border-white/10 pt-2 md:pt-0 md:pl-6">
+            <div className="p-2.5 rounded-xl bg-teal-500/15 text-teal-400 border border-teal-500/30">
+              <Leaf className="w-5 h-5" />
+            </div>
+            <div>
+              <span className="text-[10px] text-slate-400 uppercase tracking-wider block">Carbon Emissions Offset</span>
+              <span className="text-xl font-bold text-teal-300">
+                {financialImpact.monthlyCo2OffsetTons} Tons CO₂ / mo
+              </span>
+            </div>
+          </div>
+
+          <div className="flex items-center space-x-3 border-t md:border-t-0 md:border-l border-white/10 pt-2 md:pt-0 md:pl-6">
+            <div className="p-2.5 rounded-xl bg-amber-500/15 text-amber-400 border border-amber-500/30">
+              <Award className="w-5 h-5" />
+            </div>
+            <div>
+              <span className="text-[10px] text-slate-400 uppercase tracking-wider block">Hardware Node Payback</span>
+              <span className="text-xl font-bold text-amber-300">
+                {financialImpact.paybackDays} Days (Full ROI)
+              </span>
+            </div>
+          </div>
+        </div>
+
         {/* Executive Metric KPI Bar */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           
@@ -140,7 +185,7 @@ export default function FleetOverviewPage() {
               {activeSitesCount} <span className="text-xs text-slate-500 font-sans font-normal">/ {activeSitesCount} Operational</span>
             </div>
             <p className="text-[11px] text-slate-400 mt-1 flex items-center gap-1 font-mono">
-              <ShieldCheck className="w-3 h-3 text-emerald-400" /> ESP32-S3 Hardware Synced
+              <ShieldCheck className="w-3 h-3 text-emerald-400" /> ESP32-S3 Modbus RS485 Synced
             </p>
           </div>
 
@@ -180,7 +225,7 @@ export default function FleetOverviewPage() {
           <div className="glass-panel p-4 rounded-2xl border border-white/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 font-mono">
             <div>
               <h3 className="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-2">
-                <Cpu className="w-4 h-4 text-amber-400" /> Hardware Event Simulator Bench
+                <Cpu className="w-4 h-4 text-amber-400" /> Hardware Event Simulator Bench (SIH Pitch Scenarios)
               </h3>
               <p className="text-[11px] text-slate-400">Inject hardware anomalies to evaluate real-time UI reaction & alerts:</p>
             </div>
@@ -222,6 +267,7 @@ export default function FleetOverviewPage() {
               const reading = site.latestReading;
               const status = reading?.status || 'NORMAL';
               const soc = calculateBatterySoC(reading?.battery_v || 51.2);
+              const soh = calculateBatterySoH(site.readingsHistory || []);
               const trend = site.trend;
 
               const statusCardGlow =
@@ -265,10 +311,12 @@ export default function FleetOverviewPage() {
                       </span>
                     </div>
 
-                    {/* Hardware Controller Model */}
-                    <div className="text-[11px] font-mono text-slate-500 flex items-center justify-between border-b border-white/10 pb-3 mt-3">
+                    {/* Hardware Controller Model & SoH Badge */}
+                    <div className="text-[11px] font-mono text-slate-400 flex items-center justify-between border-b border-white/10 pb-3 mt-3">
                       <span>Node: {site.controller_model}</span>
-                      <span>RSSI: {reading?.rssi_dbm || -65} dBm</span>
+                      <span className="text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/30">
+                        SoH: {soh.sohPct}% ({soh.healthStatus})
+                      </span>
                     </div>
                   </div>
 
