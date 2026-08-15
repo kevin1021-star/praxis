@@ -2,16 +2,6 @@
 
 import React, { useEffect, useRef } from 'react';
 
-interface Particle {
-  x: number;
-  y: number;
-  vx: number;
-  vy: number;
-  radius: number;
-  alpha: number;
-  pulseSpeed: number;
-}
-
 export const AnimatedBackground: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -34,96 +24,90 @@ export const AnimatedBackground: React.FC = () => {
 
     window.addEventListener('resize', handleResize);
 
-    // Create 45 ambient microgrid energy particles
-    const particleCount = 45;
-    const particles: Particle[] = [];
+    // Wave parameters
+    let step = 0;
+    const waveLayers = [
+      {
+        frequency: 0.008,
+        amplitude: 45,
+        speed: 0.015,
+        offsetY: 0.45,
+        color: 'rgba(16, 185, 129, 0.12)',
+        glow: 'rgba(16, 185, 129, 0.3)',
+        lineWidth: 2.5
+      },
+      {
+        frequency: 0.006,
+        amplitude: 65,
+        speed: 0.01,
+        offsetY: 0.55,
+        color: 'rgba(6, 182, 212, 0.1)',
+        glow: 'rgba(6, 182, 212, 0.25)',
+        lineWidth: 2.0
+      },
+      {
+        frequency: 0.012,
+        amplitude: 35,
+        speed: 0.02,
+        offsetY: 0.65,
+        color: 'rgba(59, 130, 246, 0.08)',
+        glow: 'rgba(59, 130, 246, 0.2)',
+        lineWidth: 1.5
+      }
+    ];
 
-    for (let i = 0; i < particleCount; i++) {
-      particles.push({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4,
-        radius: Math.random() * 2 + 1,
-        alpha: Math.random() * 0.5 + 0.2,
-        pulseSpeed: 0.005 + Math.random() * 0.01
-      });
-    }
-
-    let waveOffset = 0;
+    // Floating energy sparks riding the waves
+    const sparkCount = 20;
+    const sparks = Array.from({ length: sparkCount }, () => ({
+      x: Math.random() * width,
+      speed: 0.8 + Math.random() * 1.5,
+      radius: 1.5 + Math.random() * 2,
+      layerIdx: Math.floor(Math.random() * waveLayers.length)
+    }));
 
     const render = () => {
       ctx.clearRect(0, 0, width, height);
+      step += 1;
 
-      // 1. Draw Subtle Ambient Aurora Gradients
-      waveOffset += 0.002;
-      const g1 = ctx.createRadialGradient(
-        width * 0.2 + Math.sin(waveOffset) * 100,
-        height * 0.3 + Math.cos(waveOffset) * 80,
-        50,
-        width * 0.2,
-        height * 0.3,
-        width * 0.5
-      );
-      g1.addColorStop(0, 'rgba(16, 185, 129, 0.06)');
-      g1.addColorStop(1, 'transparent');
-      ctx.fillStyle = g1;
-      ctx.fillRect(0, 0, width, height);
-
-      const g2 = ctx.createRadialGradient(
-        width * 0.8 + Math.cos(waveOffset * 1.2) * 90,
-        height * 0.7 + Math.sin(waveOffset * 0.8) * 90,
-        50,
-        width * 0.8,
-        height * 0.7,
-        width * 0.5
-      );
-      g2.addColorStop(0, 'rgba(20, 184, 166, 0.05)');
-      g2.addColorStop(1, 'transparent');
-      ctx.fillStyle = g2;
-      ctx.fillRect(0, 0, width, height);
-
-      // 2. Draw Moving Microgrid Nodes & Interconnecting Lines
-      for (let i = 0; i < particles.length; i++) {
-        const p = particles[i];
-        p.x += p.vx;
-        p.y += p.vy;
-
-        // Bounce boundaries
-        if (p.x < 0 || p.x > width) p.vx *= -1;
-        if (p.y < 0 || p.y > height) p.vy *= -1;
-
-        // Pulse alpha
-        p.alpha += Math.sin(waveOffset * 10 + i) * 0.005;
-        p.alpha = Math.max(0.15, Math.min(0.65, p.alpha));
-
-        // Draw particle dot
+      // 1. Draw Flowing Electrical Wave Layers
+      waveLayers.forEach((wave) => {
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(16, 185, 129, ${p.alpha})`;
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = '#10b981';
-        ctx.fill();
-        ctx.shadowBlur = 0;
+        const baseCenterY = height * wave.offsetY;
 
-        // Connect nearby nodes with subtle glowing energy lines
-        for (let j = i + 1; j < particles.length; j++) {
-          const p2 = particles[j];
-          const dx = p.x - p2.x;
-          const dy = p.y - p2.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-
-          if (dist < 140) {
-            const lineAlpha = (1 - dist / 140) * 0.15;
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(45, 212, 191, ${lineAlpha})`;
-            ctx.lineWidth = 0.8;
-            ctx.stroke();
+        for (let x = 0; x <= width; x += 4) {
+          const y = baseCenterY + Math.sin(x * wave.frequency + step * wave.speed) * wave.amplitude + Math.cos(x * 0.003 + step * 0.005) * 15;
+          if (x === 0) {
+            ctx.moveTo(x, y);
+          } else {
+            ctx.lineTo(x, y);
           }
         }
-      }
+
+        ctx.strokeStyle = wave.color;
+        ctx.lineWidth = wave.lineWidth;
+        ctx.shadowColor = wave.glow;
+        ctx.shadowBlur = 12;
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+      });
+
+      // 2. Draw Particles Riding Wave Lines
+      sparks.forEach((spark) => {
+        spark.x += spark.speed;
+        if (spark.x > width) spark.x = -10;
+
+        const wave = waveLayers[spark.layerIdx];
+        const baseCenterY = height * wave.offsetY;
+        const sparkY = baseCenterY + Math.sin(spark.x * wave.frequency + step * wave.speed) * wave.amplitude;
+
+        ctx.beginPath();
+        ctx.arc(spark.x, sparkY, spark.radius, 0, Math.PI * 2);
+        ctx.fillStyle = '#10b981';
+        ctx.shadowColor = '#10b981';
+        ctx.shadowBlur = 15;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      });
 
       animationFrameId = requestAnimationFrame(render);
     };
@@ -139,7 +123,7 @@ export const AnimatedBackground: React.FC = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0 opacity-80"
+      className="fixed inset-0 pointer-events-none z-0 opacity-90"
     />
   );
 };
