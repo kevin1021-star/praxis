@@ -7,6 +7,8 @@ import { Navbar } from '@/components/Navbar';
 import { SparklineChart } from '@/components/SparklineChart';
 import { FleetMapView } from '@/components/FleetMapView';
 import { AnimatedCounter } from '@/components/AnimatedCounter';
+import { AiInsightPanel } from '@/components/AiInsightPanel';
+import { BeforeAfterComparison } from '@/components/BeforeAfterComparison';
 import { calculateBatterySoC, calculateBatterySoH, calculateFleetFinancialImpact } from '@/lib/analytics';
 import { 
   Zap, 
@@ -29,13 +31,15 @@ import {
   Radio,
   Coins,
   Leaf,
-  Award
+  Award,
+  Sparkles
 } from 'lucide-react';
 
 export default function FleetOverviewPage() {
   const { sites, isDemoMode, hardwareLogs, lastUpdatedTime, triggerHardwareEvent } = useGridPulse();
   const [viewMode, setViewMode] = useState<'grid' | 'map'>('grid');
   const [showTerminal, setShowTerminal] = useState<boolean>(false);
+  const [lastActiveEvent, setLastActiveEvent] = useState<string | null>(null);
 
   // Compute fleet aggregated totals
   const totalFleetPower = sites.reduce((sum, s) => {
@@ -50,76 +54,129 @@ export default function FleetOverviewPage() {
   // Financial ROI & CO2 impact calculations
   const financialImpact = calculateFleetFinancialImpact(activeSitesCount, totalFleetPower);
 
+  const handleSimulateEvent = (eventKey: 'CLOUD_COVER' | 'GRID_SURGE' | 'OVERHEAT_FAULT' | 'RECOVERY_RESET') => {
+    setLastActiveEvent(eventKey);
+    triggerHardwareEvent(eventKey);
+  };
+
   return (
     <div className="min-h-screen bg-transparent text-slate-100 flex flex-col font-sans">
       <Navbar />
 
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 lg:px-8 py-8 space-y-8">
         
-        {/* Executive Welcome Hero & View Controls */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-6">
-          <div>
-            <div className="flex items-center space-x-3 mb-1.5">
-              <h1 className="text-2xl lg:text-3xl font-bold tracking-tight text-white font-mono">
-                FLEET OPERATIONS MATRIX
+        {/* HERO STORYTELLING SECTION (Expert Review #1) */}
+        <div className="glass-panel rounded-3xl p-6 lg:p-8 border border-emerald-500/30 bg-gradient-to-r from-emerald-950/40 via-slate-950/80 to-slate-950/90 shadow-2xl relative overflow-hidden">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10 font-mono">
+            <div>
+              <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs mb-3 font-semibold">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>SIH 2026 PS 4 | AI-POWERED RENEWABLE ENERGY OS</span>
+              </div>
+              
+              <h1 className="text-3xl lg:text-5xl font-extrabold text-white tracking-tight">
+                GRID<span className="text-emerald-400">PULSE</span>
               </h1>
-              <span className={`px-2.5 py-0.5 rounded-full text-[11px] font-mono border ${
-                isDemoMode 
-                  ? 'bg-amber-500/10 text-amber-400 border-amber-500/30' 
-                  : 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30'
-              }`}>
-                {isDemoMode ? 'SIMULATED HARNESS' : 'LIVE WEBSOCKET FEED'}
-              </span>
-            </div>
-            <p className="text-xs text-slate-400 font-mono flex items-center gap-2">
-              <Clock className="w-3.5 h-3.5 text-slate-500" />
-              <span>Last Packet Sync: <span className="text-slate-200 font-bold">{lastUpdatedTime}</span></span>
-              <span className="text-slate-700">|</span>
-              <Radio className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
-              <span>3 Off-Grid Microgrids Online</span>
-            </p>
-          </div>
+              
+              <p className="text-sm lg:text-base text-slate-200 font-sans font-medium leading-relaxed max-w-2xl mt-2">
+                AI-powered intelligence for reliable rural solar microgrids.
+              </p>
 
-          {/* View Toggle & Telemetry Console Trigger */}
-          <div className="flex items-center space-x-3">
-            <div className="flex items-center bg-slate-950/80 border border-white/10 p-1 rounded-xl font-mono text-xs">
-              <button
-                onClick={() => setViewMode('grid')}
-                className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg transition-all ${
-                  viewMode === 'grid'
-                    ? 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 shadow-sm font-semibold'
-                    : 'text-slate-400 hover:text-white'
-                }`}
-              >
-                <Grid className="w-3.5 h-3.5" />
-                <span>Card Grid</span>
-              </button>
-              <button
-                onClick={() => setViewMode('map')}
-                className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg transition-all ${
-                  viewMode === 'map'
-                    ? 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 shadow-sm font-semibold'
-                    : 'text-slate-400 hover:text-white'
-                }`}
-              >
-                <Map className="w-3.5 h-3.5" />
-                <span>GIS Node Map</span>
-              </button>
+              <div className="flex flex-wrap items-center gap-2 text-xs lg:text-sm text-emerald-300 mt-4">
+                <span className="bg-emerald-500/15 text-emerald-300 px-3 py-1 rounded border border-emerald-500/30 font-bold">MONITOR.</span>
+                <span className="bg-teal-500/15 text-teal-300 px-3 py-1 rounded border border-teal-500/30 font-bold">PREDICT.</span>
+                <span className="bg-cyan-500/15 text-cyan-300 px-3 py-1 rounded border border-cyan-500/30 font-bold">RESPOND.</span>
+                <span className="text-slate-400 font-sans text-xs hidden sm:inline ml-2">
+                  Keeping critical community healthcare & school power running 24/7.
+                </span>
+              </div>
             </div>
 
-            <button
-              onClick={() => setShowTerminal(!showTerminal)}
-              className={`flex items-center space-x-1.5 px-3 py-2 rounded-xl border text-xs font-mono transition-all ${
-                showTerminal
-                  ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/40'
-                  : 'bg-slate-950/80 text-slate-400 border-white/10 hover:text-slate-200'
-              }`}
-            >
-              <Terminal className="w-4 h-4" />
-              <span className="hidden sm:inline">Telemetry Serial</span>
-            </button>
+            {/* View Mode & Serial Console Controls */}
+            <div className="flex flex-wrap items-center gap-3">
+              <div className="flex items-center bg-slate-950/80 border border-white/10 p-1 rounded-xl text-xs">
+                <button
+                  onClick={() => setViewMode('grid')}
+                  className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg transition-all ${
+                    viewMode === 'grid'
+                      ? 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 shadow-sm font-semibold'
+                      : 'text-slate-400 hover:text-white'
+                  }`}
+                >
+                  <Grid className="w-3.5 h-3.5" />
+                  <span>Card Grid</span>
+                </button>
+                <button
+                  onClick={() => setViewMode('map')}
+                  className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg transition-all ${
+                    viewMode === 'map'
+                      ? 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 shadow-sm font-semibold'
+                      : 'text-slate-400 hover:text-white'
+                  }`}
+                >
+                  <Map className="w-3.5 h-3.5" />
+                  <span>GIS Map</span>
+                </button>
+              </div>
+
+              <button
+                onClick={() => setShowTerminal(!showTerminal)}
+                className={`flex items-center space-x-1.5 px-3 py-2 rounded-xl border text-xs text-slate-300 font-mono transition-all ${
+                  showTerminal
+                    ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/40'
+                    : 'bg-slate-950/80 border-white/10 hover:text-slate-200'
+                }`}
+              >
+                <Terminal className="w-4 h-4" />
+                <span className="hidden sm:inline">Hardware Serial Log</span>
+              </button>
+            </div>
           </div>
         </div>
+
+        {/* HARDWARE SIMULATOR BENCH (COMPETITION WINNING ALIVE DEMO FEATURE - Expert Review #2) */}
+        {isDemoMode && (
+          <div className="glass-panel p-5 rounded-2xl border border-amber-500/30 bg-amber-950/10 space-y-3 font-mono">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
+              <div>
+                <h3 className="text-xs font-bold text-amber-400 uppercase tracking-wider flex items-center gap-2">
+                  <Cpu className="w-4 h-4" /> Competition Anomaly Simulator Bench (Live Pitch Demonstrator)
+                </h3>
+                <p className="text-[11px] text-slate-400">Trigger hardware anomalies to watch AI Causality Chain reaction in real-time:</p>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2">
+                <button
+                  onClick={() => handleSimulateEvent('CLOUD_COVER')}
+                  className="px-3.5 py-1.5 bg-blue-500/15 hover:bg-blue-500/25 text-blue-300 border border-blue-500/40 rounded-xl text-xs font-bold transition-all shadow-sm"
+                >
+                  ☁ Cloud Cover Drop
+                </button>
+                <button
+                  onClick={() => handleSimulateEvent('GRID_SURGE')}
+                  className="px-3.5 py-1.5 bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/40 rounded-xl text-xs font-bold transition-all shadow-sm"
+                >
+                  ⚡ Industrial Surge
+                </button>
+                <button
+                  onClick={() => handleSimulateEvent('OVERHEAT_FAULT')}
+                  className="px-3.5 py-1.5 bg-red-500/15 hover:bg-red-500/25 text-red-300 border border-red-500/40 rounded-xl text-xs font-bold transition-all shadow-sm"
+                >
+                  🔥 Trigger Fault
+                </button>
+                <button
+                  onClick={() => handleSimulateEvent('RECOVERY_RESET')}
+                  className="px-3.5 py-1.5 bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/40 rounded-xl text-xs font-bold transition-all shadow-sm"
+                >
+                  ✓ BMS Reset / Recover
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* AI NEURAL INSIGHT ENGINE PANEL (Expert Review #3) */}
+        <AiInsightPanel activeEvent={lastActiveEvent} sites={sites} />
 
         {/* FINANCIAL ROI & ENVIRONMENTAL CARBON OFFSET SUMMARY BAR */}
         <div className="glass-panel p-4 rounded-2xl border border-emerald-500/30 bg-emerald-950/15 flex flex-col md:flex-row items-center justify-between gap-4 font-mono">
@@ -161,43 +218,43 @@ export default function FleetOverviewPage() {
         </div>
 
         {/* Executive Metric KPI Bar */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 font-mono">
           
           <div className="glass-card rounded-2xl p-5 border border-white/10">
-            <div className="flex items-center justify-between text-slate-400 mb-2 text-xs font-mono">
+            <div className="flex items-center justify-between text-slate-400 mb-2 text-xs">
               <span>TOTAL PV INPUT POWER</span>
               <Sun className="w-4 h-4 text-yellow-400" />
             </div>
-            <div className="text-2xl font-bold text-white font-mono tracking-tight">
+            <div className="text-2xl font-bold text-white tracking-tight">
               <AnimatedCounter value={totalFleetPower} decimals={1} suffix=" kW" />
             </div>
-            <p className="text-[11px] text-emerald-400 mt-1 flex items-center gap-1 font-mono">
+            <p className="text-[11px] text-emerald-400 mt-1 flex items-center gap-1">
               <Activity className="w-3 h-3" /> Combined Solar Array Output
             </p>
           </div>
 
           <div className="glass-card rounded-2xl p-5 border border-white/10">
-            <div className="flex items-center justify-between text-slate-400 mb-2 text-xs font-mono">
+            <div className="flex items-center justify-between text-slate-400 mb-2 text-xs">
               <span>ONLINE MICROGRIDS</span>
               <Cpu className="w-4 h-4 text-emerald-400" />
             </div>
-            <div className="text-2xl font-bold text-white font-mono tracking-tight">
+            <div className="text-2xl font-bold text-white tracking-tight">
               {activeSitesCount} <span className="text-xs text-slate-500 font-sans font-normal">/ {activeSitesCount} Operational</span>
             </div>
-            <p className="text-[11px] text-slate-400 mt-1 flex items-center gap-1 font-mono">
+            <p className="text-[11px] text-slate-400 mt-1 flex items-center gap-1">
               <ShieldCheck className="w-3 h-3 text-emerald-400" /> ESP32-S3 Modbus RS485 Synced
             </p>
           </div>
 
           <div className="glass-card rounded-2xl p-5 border border-white/10">
-            <div className="flex items-center justify-between text-slate-400 mb-2 text-xs font-mono">
+            <div className="flex items-center justify-between text-slate-400 mb-2 text-xs">
               <span>ANOMALY WARNINGS</span>
               <AlertTriangle className="w-4 h-4 text-amber-400" />
             </div>
-            <div className="text-2xl font-bold text-white font-mono tracking-tight">
+            <div className="text-2xl font-bold text-white tracking-tight">
               {warningCount} <span className="text-xs text-amber-400/80 font-sans font-normal">Sites Throttled</span>
             </div>
-            <p className="text-[11px] text-amber-400 mt-1 font-mono">
+            <p className="text-[11px] text-amber-400 mt-1">
               {warningCount > 0 ? 'Thermal or Load surge alert' : 'Thermal headroom optimal'}
             </p>
           </div>
@@ -207,58 +264,20 @@ export default function FleetOverviewPage() {
               ? 'border-red-500/50 status-glow-fault bg-red-950/20' 
               : 'border-white/10'
           }`}>
-            <div className="flex items-center justify-between text-slate-400 mb-2 text-xs font-mono">
+            <div className="flex items-center justify-between text-slate-400 mb-2 text-xs">
               <span>CRITICAL FAULTS</span>
               <Zap className={`w-4 h-4 ${faultCount > 0 ? 'text-red-400 animate-pulse' : 'text-slate-500'}`} />
             </div>
-            <div className={`text-2xl font-bold font-mono tracking-tight ${faultCount > 0 ? 'text-red-400' : 'text-white'}`}>
+            <div className={`text-2xl font-bold tracking-tight ${faultCount > 0 ? 'text-red-400' : 'text-white'}`}>
               {faultCount}
             </div>
-            <p className={`text-[11px] mt-1 font-mono ${faultCount > 0 ? 'text-red-400 font-semibold' : 'text-slate-400'}`}>
+            <p className={`text-[11px] mt-1 ${faultCount > 0 ? 'text-red-400 font-semibold' : 'text-slate-400'}`}>
               {faultCount > 0 ? 'BMS Safety Trip Active' : 'Zero hardware trips'}
             </p>
           </div>
         </div>
 
-        {/* HARDWARE SIMULATION EVENT BENCH (Demo Mode Control Bar) */}
-        {isDemoMode && (
-          <div className="glass-panel p-4 rounded-2xl border border-white/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 font-mono">
-            <div>
-              <h3 className="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-2">
-                <Cpu className="w-4 h-4 text-amber-400" /> Hardware Event Simulator Bench (SIH Pitch Scenarios)
-              </h3>
-              <p className="text-[11px] text-slate-400">Inject hardware anomalies to evaluate real-time UI reaction & alerts:</p>
-            </div>
-            <div className="flex flex-wrap items-center gap-2">
-              <button
-                onClick={() => triggerHardwareEvent('GRID_SURGE')}
-                className="px-3 py-1.5 bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 rounded-xl text-xs transition-colors"
-              >
-                + Industrial Surge
-              </button>
-              <button
-                onClick={() => triggerHardwareEvent('CLOUD_COVER')}
-                className="px-3 py-1.5 bg-blue-500/10 hover:bg-blue-500/20 text-blue-300 border border-blue-500/30 rounded-xl text-xs transition-colors"
-              >
-                + Cloud Cover Drop
-              </button>
-              <button
-                onClick={() => triggerHardwareEvent('OVERHEAT_FAULT')}
-                className="px-3 py-1.5 bg-red-500/10 hover:bg-red-500/20 text-red-300 border border-red-500/30 rounded-xl text-xs transition-colors"
-              >
-                ! Trigger Critical Fault
-              </button>
-              <button
-                onClick={() => triggerHardwareEvent('RECOVERY_RESET')}
-                className="px-3 py-1.5 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 rounded-xl text-xs transition-colors"
-              >
-                ✓ BMS Reset / Normal
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* View Content: Card Grid vs Geo Map */}
+        {/* View Content: GIS Map vs Card Grid (Expert Review #5) */}
         {viewMode === 'map' ? (
           <FleetMapView sites={sites} />
         ) : (
@@ -392,14 +411,14 @@ export default function FleetOverviewPage() {
                   </div>
 
                   {/* Predictive Status Line & Action Link */}
-                  <div className="pt-3 border-t border-white/10 flex items-center justify-between">
-                    <div className="text-[10px] font-mono text-slate-400 truncate max-w-[200px]">
+                  <div className="pt-3 border-t border-white/10 flex items-center justify-between font-mono">
+                    <div className="text-[10px] text-slate-400 truncate max-w-[200px]">
                       {trend?.statusDescription || 'Hardware Nominal'}
                     </div>
 
                     <Link
                       href={`/site/${site.id}`}
-                      className="px-3.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-slate-200 border border-white/10 rounded-xl text-xs font-mono flex items-center space-x-1 transition-colors"
+                      className="px-3.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-slate-200 border border-white/10 rounded-xl text-xs flex items-center space-x-1 transition-colors"
                     >
                       <span>Inspect</span>
                       <ArrowUpRight className="w-3.5 h-3.5 text-emerald-400" />
@@ -410,6 +429,9 @@ export default function FleetOverviewPage() {
             })}
           </div>
         )}
+
+        {/* BEFORE & AFTER COMPARISON + FEATURE COMPARISON MATRIX (Expert Review #4 & #6) */}
+        <BeforeAfterComparison />
 
         {/* Live Hardware Serial Console Drawer */}
         {showTerminal && (
