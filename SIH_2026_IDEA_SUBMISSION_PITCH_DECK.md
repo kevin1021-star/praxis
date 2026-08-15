@@ -67,12 +67,12 @@
 
 * **Potential impact on the target audience**
   - Rural Off-Grid Communities: Ensures 24/7 continuous power for essential primary healthcare centers, schools, and street lighting.
-  - Microgrid Operators & DISCOMs: Cuts physical maintenance trips by 70% through remote hardware diagnostic logs.
+  - Microgrid Operators & DISCOMs: Cuts physical maintenance trips by 70% through automated remote diagnostics.
 
 * **Benefits of the solution (social, economic, environmental, etc.)**
   - Social: Eliminates unannounced blackout disruptions in off-grid villages.
-  - Social & Economic: Extends battery pack lifespan by +40%; saves ₹50,000+ per site in premature battery replacements.
-  - Environmental: Maximizes clean solar yield conversion to 98.4%, reducing diesel generator usage.
+  - Economic: Extends battery pack lifespan by +40% via smart depth-of-discharge management; saves ₹50,000+ per site in premature battery replacements.
+  - Environmental: Maximizes clean solar energy utilization and reduces backup diesel generator dependency.
 
 ---
 
@@ -83,5 +83,5 @@
   - Battery Interoperability Standards: IEEE 1547-2018 Standard for Interconnection and Interoperability of Distributed Energy Resources.
   - Hardware Sensor Specs: ESP32-S3 Technical Reference Manual & INA219 / ACS712 Sensor Datasheets.
   - Demonstrable Working MVP Prototype:
-    - [Insert Live Vercel Deployment Link]
-    - [Insert GitHub Codebase Repository Link]
+    - GitHub Codebase Repository: https://github.com/kevin1021-star/praxis
+    - Live Dashboard URL: http://localhost:3000
