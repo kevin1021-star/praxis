@@ -24,81 +24,53 @@ export const AnimatedBackground: React.FC = () => {
 
     window.addEventListener('resize', handleResize);
 
-    // 3D Dark Silk Ribbon Wave Parameters (Matching Reference Image)
+    // Glowing energy sparks & ambient light pulses
+    const particleCount = 25;
+    const particles = Array.from({ length: particleCount }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      vx: (Math.random() - 0.5) * 0.5,
+      vy: (Math.random() - 0.5) * 0.5,
+      radius: Math.random() * 2 + 1,
+      alpha: Math.random() * 0.4 + 0.2
+    }));
+
     let step = 0;
-    const ribbonCount = 10;
 
     const render = () => {
       ctx.clearRect(0, 0, width, height);
-      step += 0.009;
+      step += 0.01;
 
-      // Dark obsidian background base
-      ctx.fillStyle = '#05070e';
+      // Soft ambient energy light highlights over background image
+      const g1 = ctx.createRadialGradient(
+        width * 0.3 + Math.sin(step) * 60,
+        height * 0.4 + Math.cos(step) * 50,
+        20,
+        width * 0.3,
+        height * 0.4,
+        width * 0.45
+      );
+      g1.addColorStop(0, 'rgba(16, 185, 129, 0.08)');
+      g1.addColorStop(1, 'transparent');
+      ctx.fillStyle = g1;
       ctx.fillRect(0, 0, width, height);
 
-      // Render 3D silk ribbons flowing diagonally from top right to bottom left (Matching Image)
-      for (let i = 0; i < ribbonCount; i++) {
-        const offsetPct = i / ribbonCount;
-        const baseY = height * (0.15 + offsetPct * 0.65);
-        const waveAmp = 65 + i * 10;
-        const freq = 0.0028 - i * 0.00012;
-        const phase = step + i * 0.35;
+      // Moving microgrid energy particles
+      particles.forEach((p) => {
+        p.x += p.vx;
+        p.y += p.vy;
 
-        // Draw Ribbon Body
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
+
         ctx.beginPath();
-        ctx.moveTo(0, height);
-
-        for (let x = 0; x <= width; x += 8) {
-          const y = baseY + Math.sin(x * freq + phase) * waveAmp + Math.cos(x * 0.0018 + step * 0.5 + i) * 30;
-          if (x === 0) {
-            ctx.lineTo(x, y);
-          } else {
-            ctx.lineTo(x, y);
-          }
-        }
-
-        ctx.lineTo(width, height);
-        ctx.closePath();
-
-        // 3D Gradient Shading: Dark slate to deep obsidian shadow
-        const fillGrad = ctx.createLinearGradient(0, baseY - waveAmp, 0, height);
-        const lightShade = Math.floor(25 + i * 6); // Metallic slate gradient
-        const darkShade = Math.floor(10 + i * 2);
-        fillGrad.addColorStop(0, `rgb(${lightShade + 15}, ${lightShade + 22}, ${lightShade + 32})`);
-        fillGrad.addColorStop(0.3, `rgb(${lightShade}, ${lightShade + 5}, ${lightShade + 12})`);
-        fillGrad.addColorStop(1, `rgb(${darkShade}, ${darkShade + 2}, ${darkShade + 6})`);
-        ctx.fillStyle = fillGrad;
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(52, 211, 153, ${p.alpha})`;
+        ctx.shadowColor = '#10b981';
+        ctx.shadowBlur = 10;
         ctx.fill();
-
-        // Specular Edge Highlight Stroke (Bright Metallic Silver / Emerald Rim Lighting)
-        ctx.beginPath();
-        for (let x = 0; x <= width; x += 8) {
-          const y = baseY + Math.sin(x * freq + phase) * waveAmp + Math.cos(x * 0.0018 + step * 0.5 + i) * 30;
-          if (x === 0) {
-            ctx.moveTo(x, y);
-          } else {
-            ctx.lineTo(x, y);
-          }
-        }
-
-        const highlightAlpha = Math.max(0.2, 0.75 - i * 0.05);
-
-        if (i === 3 || i === 4) {
-          // Highlight active energy wave with subtle glowing emerald rim
-          ctx.strokeStyle = `rgba(52, 211, 153, ${highlightAlpha})`;
-          ctx.shadowColor = '#10b981';
-          ctx.shadowBlur = 16;
-        } else {
-          // Pure metallic silver ribbon crest highlight (Matching reference photo)
-          ctx.strokeStyle = `rgba(241, 245, 249, ${highlightAlpha})`;
-          ctx.shadowColor = '#cbd5e1';
-          ctx.shadowBlur = 8;
-        }
-
-        ctx.lineWidth = 2.8 - i * 0.18;
-        ctx.stroke();
         ctx.shadowBlur = 0;
-      }
+      });
 
       animationFrameId = requestAnimationFrame(render);
     };
@@ -113,10 +85,7 @@ export const AnimatedBackground: React.FC = () => {
 
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-      <canvas
-        ref={canvasRef}
-        className="w-full h-full block"
-      />
+      <canvas ref={canvasRef} className="w-full h-full block" />
     </div>
   );
 };
