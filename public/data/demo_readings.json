@@ -1,0 +1,225 @@
+{
+  "sites": [
+    {
+      "id": "village-a",
+      "name": "Village A Microgrid",
+      "location": "Kiphire Sector 4, Nagaland",
+      "lat": 25.8942,
+      "lng": 94.7731,
+      "capacity_kw": 25.0,
+      "battery_capacity_kwh": 48.0,
+      "controller_model": "ESP32-S3-GridCore Node v2.4",
+      "inverter_model": "Victron MultiPlus-II 48V/5kVA",
+      "firmware_ver": "v2.4.1-ota",
+      "installed_date": "2024-03-15"
+    },
+    {
+      "id": "village-b",
+      "name": "Village B Microgrid",
+      "location": "Mawlynnong West, Meghalaya",
+      "lat": 25.2014,
+      "lng": 91.9161,
+      "capacity_kw": 18.5,
+      "battery_capacity_kwh": 36.0,
+      "controller_model": "ESP32-S3-GridCore Node v2.4",
+      "inverter_model": "Growatt SPF 5000ES 48V",
+      "firmware_ver": "v2.4.1-ota",
+      "installed_date": "2024-05-20"
+    },
+    {
+      "id": "community-hub-1",
+      "name": "Community Solar Hub 1",
+      "location": "Ziro Valley Cluster, Arunachal Pradesh",
+      "lat": 27.5937,
+      "lng": 93.8385,
+      "capacity_kw": 40.0,
+      "battery_capacity_kwh": 96.0,
+      "controller_model": "ESP32-S3-GridCore Dual-redundant",
+      "inverter_model": "SMA Sunny Island 8.0H 48V",
+      "firmware_ver": "v2.5.0-pro",
+      "installed_date": "2023-11-10"
+    }
+  ],
+  "readings": [
+    {
+      "step": 1,
+      "village-a": { "status": "NORMAL", "battery_v": 51.2, "load_a": 14.8, "irradiance_raw": 520, "temp_c": 28.5, "pv_voltage": 118.2, "pv_current": 10.4, "ac_out_v": 230.1, "ac_freq": 50.0, "cell_delta_mv": 12, "bms_status": "BULK_CHARGE", "rssi_dbm": -64, "ping_ms": 22 },
+      "village-b": { "status": "NORMAL", "battery_v": 52.1, "load_a": 11.2, "irradiance_raw": 610, "temp_c": 27.1, "pv_voltage": 122.5, "pv_current": 9.1, "ac_out_v": 229.8, "ac_freq": 50.0, "cell_delta_mv": 8, "bms_status": "FLOAT_CHARGE", "rssi_dbm": -71, "ping_ms": 31 },
+      "community-hub-1": { "status": "NORMAL", "battery_v": 53.0, "load_a": 28.4, "irradiance_raw": 740, "temp_c": 29.8, "pv_voltage": 134.0, "pv_current": 18.2, "ac_out_v": 230.4, "ac_freq": 50.1, "cell_delta_mv": 6, "bms_status": "FLOAT_CHARGE", "rssi_dbm": -59, "ping_ms": 18 }
+    },
+    {
+      "step": 2,
+      "village-a": { "status": "NORMAL", "battery_v": 51.5, "load_a": 15.2, "irradiance_raw": 580, "temp_c": 29.0, "pv_voltage": 120.4, "pv_current": 11.8, "ac_out_v": 230.0, "ac_freq": 50.0, "cell_delta_mv": 14, "bms_status": "BULK_CHARGE", "rssi_dbm": -65, "ping_ms": 24 },
+      "village-b": { "status": "NORMAL", "battery_v": 52.3, "load_a": 11.8, "irradiance_raw": 640, "temp_c": 27.5, "pv_voltage": 124.0, "pv_current": 9.8, "ac_out_v": 230.2, "ac_freq": 50.0, "cell_delta_mv": 9, "bms_status": "FLOAT_CHARGE", "rssi_dbm": -70, "ping_ms": 28 },
+      "community-hub-1": { "status": "NORMAL", "battery_v": 53.2, "load_a": 29.0, "irradiance_raw": 780, "temp_c": 30.1, "pv_voltage": 136.2, "pv_current": 19.5, "ac_out_v": 230.5, "ac_freq": 50.0, "cell_delta_mv": 7, "bms_status": "FLOAT_CHARGE", "rssi_dbm": -60, "ping_ms": 19 }
+    },
+    {
+      "step": 3,
+      "village-a": { "status": "NORMAL", "battery_v": 51.9, "load_a": 16.0, "irradiance_raw": 650, "temp_c": 29.8, "pv_voltage": 123.1, "pv_current": 13.5, "ac_out_v": 230.2, "ac_freq": 50.0, "cell_delta_mv": 15, "bms_status": "BULK_CHARGE", "rssi_dbm": -63, "ping_ms": 21 },
+      "village-b": { "status": "NORMAL", "battery_v": 52.5, "load_a": 12.1, "irradiance_raw": 690, "temp_c": 28.0, "pv_voltage": 125.8, "pv_current": 10.6, "ac_out_v": 230.1, "ac_freq": 50.0, "cell_delta_mv": 10, "bms_status": "FLOAT_CHARGE", "rssi_dbm": -68, "ping_ms": 26 },
+      "community-hub-1": { "status": "NORMAL", "battery_v": 53.5, "load_a": 30.2, "irradiance_raw": 820, "temp_c": 30.5, "pv_voltage": 138.0, "pv_current": 21.0, "ac_out_v": 230.2, "ac_freq": 50.0, "cell_delta_mv": 6, "bms_status": "FLOAT_CHARGE", "rssi_dbm": -58, "ping_ms": 17 }
+    },
+    {
+      "step": 4,
+      "village-a": { "status": "NORMAL", "battery_v": 52.4, "load_a": 17.5, "irradiance_raw": 740, "temp_c": 30.5, "pv_voltage": 126.8, "pv_current": 15.2, "ac_out_v": 230.0, "ac_freq": 50.0, "cell_delta_mv": 16, "bms_status": "BULK_CHARGE", "rssi_dbm": -64, "ping_ms": 25 },
+      "village-b": { "status": "NORMAL", "battery_v": 52.8, "load_a": 12.9, "irradiance_raw": 730, "temp_c": 28.4, "pv_voltage": 127.1, "pv_current": 11.4, "ac_out_v": 230.0, "ac_freq": 50.0, "cell_delta_mv": 11, "bms_status": "FLOAT_CHARGE", "rssi_dbm": -69, "ping_ms": 30 },
+      "community-hub-1": { "status": "NORMAL", "battery_v": 53.7, "load_a": 31.5, "irradiance_raw": 860, "temp_c": 31.0, "pv_voltage": 140.2, "pv_current": 22.8, "ac_out_v": 230.1, "ac_freq": 50.0, "cell_delta_mv": 5, "bms_status": "FLOAT_CHARGE", "rssi_dbm": -57, "ping_ms": 16 }
+    },
+    {
+      "step": 5,
+      "village-a": { "status": "NORMAL", "battery_v": 52.9, "load_a": 18.2, "irradiance_raw": 820, "temp_c": 31.2, "pv_voltage": 129.5, "pv_current": 17.1, "ac_out_v": 230.1, "ac_freq": 50.0, "cell_delta_mv": 15, "bms_status": "FLOAT_CHARGE", "rssi_dbm": -66, "ping_ms": 23 },
+      "village-b": { "status": "NORMAL", "battery_v": 53.0, "load_a": 13.5, "irradiance_raw": 770, "temp_c": 28.9, "pv_voltage": 128.5, "pv_current": 12.2, "ac_out_v": 229.9, "ac_freq": 50.0, "cell_delta_mv": 10, "bms_status": "FLOAT_CHARGE", "rssi_dbm": -72, "ping_ms": 33 },
+      "community-hub-1": { "status": "NORMAL", "battery_v": 54.0, "load_a": 32.0, "irradiance_raw": 890, "temp_c": 31.4, "pv_voltage": 142.0, "pv_current": 24.1, "ac_out_v": 230.0, "ac_freq": 50.0, "cell_delta_mv": 5, "bms_status": "FLOAT_CHARGE", "rssi_dbm": -58, "ping_ms": 18 }
+    },
+    {
+      "step": 6,
+      "village-a": { "status": "NORMAL", "battery_v": 53.2, "load_a": 19.0, "irradiance_raw": 870, "temp_c": 32.1, "pv_voltage": 131.0, "pv_current": 18.4, "ac_out_v": 230.2, "ac_freq": 50.0, "cell_delta_mv": 14, "bms_status": "FLOAT_CHARGE", "rssi_dbm": -64, "ping_ms": 22 },
+      "village-b": { "status": "NORMAL", "battery_v": 53.1, "load_a": 14.1, "irradiance_raw": 810, "temp_c": 29.2, "pv_voltage": 129.8, "pv_current": 13.0, "ac_out_v": 230.1, "ac_freq": 50.0, "cell_delta_mv": 9, "bms_status": "FLOAT_CHARGE", "rssi_dbm": -71, "ping_ms": 31 },
+      "community-hub-1": { "status": "NORMAL", "battery_v": 54.1, "load_a": 33.2, "irradiance_raw": 910, "temp_c": 31.8, "pv_voltage": 143.1, "pv_current": 25.0, "ac_out_v": 230.2, "ac_freq": 50.0, "cell_delta_mv": 6, "bms_status": "FLOAT_CHARGE", "rssi_dbm": -59, "ping_ms": 17 }
+    },
+    {
+      "step": 7,
+      "village-a": { "status": "NORMAL", "battery_v": 53.4, "load_a": 20.1, "irradiance_raw": 910, "temp_c": 32.8, "pv_voltage": 132.4, "pv_current": 19.2, "ac_out_v": 230.1, "ac_freq": 50.0, "cell_delta_mv": 13, "bms_status": "FLOAT_CHARGE", "rssi_dbm": -63, "ping_ms": 20 },
+      "village-b": { "status": "NORMAL", "battery_v": 53.3, "load_a": 14.8, "irradiance_raw": 840, "temp_c": 29.7, "pv_voltage": 131.0, "pv_current": 13.8, "ac_out_v": 230.0, "ac_freq": 50.0, "cell_delta_mv": 8, "bms_status": "FLOAT_CHARGE", "rssi_dbm": -67, "ping_ms": 25 },
+      "community-hub-1": { "status": "NORMAL", "battery_v": 54.2, "load_a": 34.0, "irradiance_raw": 930, "temp_c": 32.2, "pv_voltage": 144.0, "pv_current": 25.8, "ac_out_v": 230.3, "ac_freq": 50.0, "cell_delta_mv": 5, "bms_status": "FLOAT_CHARGE", "rssi_dbm": -56, "ping_ms": 15 }
+    },
+    {
+      "step": 8,
+      "village-a": { "status": "NORMAL", "battery_v": 53.5, "load_a": 21.0, "irradiance_raw": 920, "temp_c": 33.4, "pv_voltage": 133.0, "pv_current": 19.8, "ac_out_v": 230.0, "ac_freq": 50.0, "cell_delta_mv": 12, "bms_status": "FLOAT_CHARGE", "rssi_dbm": -65, "ping_ms": 23 },
+      "village-b": { "status": "NORMAL", "battery_v": 53.4, "load_a": 15.2, "irradiance_raw": 860, "temp_c": 30.1, "pv_voltage": 132.2, "pv_current": 14.3, "ac_out_v": 230.2, "ac_freq": 50.0, "cell_delta_mv": 8, "bms_status": "FLOAT_CHARGE", "rssi_dbm": -70, "ping_ms": 29 },
+      "community-hub-1": { "status": "NORMAL", "battery_v": 54.3, "load_a": 35.1, "irradiance_raw": 940, "temp_c": 32.6, "pv_voltage": 144.8, "pv_current": 26.2, "ac_out_v": 230.2, "ac_freq": 50.0, "cell_delta_mv": 5, "bms_status": "FLOAT_CHARGE", "rssi_dbm": -57, "ping_ms": 16 }
+    },
+    {
+      "step": 9,
+      "village-a": { "status": "NORMAL", "battery_v": 53.3, "load_a": 24.5, "irradiance_raw": 850, "temp_c": 34.5, "pv_voltage": 128.5, "pv_current": 17.5, "ac_out_v": 229.8, "ac_freq": 50.0, "cell_delta_mv": 14, "bms_status": "FLOAT_CHARGE", "rssi_dbm": -64, "ping_ms": 24 },
+      "village-b": { "status": "NORMAL", "battery_v": 53.2, "load_a": 16.0, "irradiance_raw": 830, "temp_c": 30.6, "pv_voltage": 130.5, "pv_current": 13.7, "ac_out_v": 230.0, "ac_freq": 50.0, "cell_delta_mv": 9, "bms_status": "FLOAT_CHARGE", "rssi_dbm": -69, "ping_ms": 28 },
+      "community-hub-1": { "status": "NORMAL", "battery_v": 54.1, "load_a": 36.5, "irradiance_raw": 910, "temp_c": 33.1, "pv_voltage": 143.0, "pv_current": 25.1, "ac_out_v": 230.1, "ac_freq": 50.0, "cell_delta_mv": 6, "bms_status": "FLOAT_CHARGE", "rssi_dbm": -58, "ping_ms": 18 }
+    },
+    {
+      "step": 10,
+      "village-a": { "status": "NORMAL", "battery_v": 52.8, "load_a": 28.0, "irradiance_raw": 760, "temp_c": 35.8, "pv_voltage": 124.0, "pv_current": 15.0, "ac_out_v": 229.5, "ac_freq": 49.9, "cell_delta_mv": 16, "bms_status": "DISCHARGING", "rssi_dbm": -66, "ping_ms": 26 },
+      "village-b": { "status": "NORMAL", "battery_v": 53.0, "load_a": 17.2, "irradiance_raw": 800, "temp_c": 31.0, "pv_voltage": 129.0, "pv_current": 13.0, "ac_out_v": 230.0, "ac_freq": 50.0, "cell_delta_mv": 10, "bms_status": "FLOAT_CHARGE", "rssi_dbm": -68, "ping_ms": 27 },
+      "community-hub-1": { "status": "NORMAL", "battery_v": 53.9, "load_a": 38.0, "irradiance_raw": 880, "temp_c": 33.8, "pv_voltage": 141.5, "pv_current": 24.0, "ac_out_v": 230.0, "ac_freq": 50.0, "cell_delta_mv": 7, "bms_status": "FLOAT_CHARGE", "rssi_dbm": -59, "ping_ms": 19 }
+    },
+    {
+      "step": 11,
+      "village-a": { "status": "WARNING", "battery_v": 50.2, "load_a": 36.5, "irradiance_raw": 590, "temp_c": 39.4, "pv_voltage": 114.2, "pv_current": 11.2, "ac_out_v": 228.9, "ac_freq": 49.8, "cell_delta_mv": 24, "bms_status": "THERMAL_THROTTLE", "rssi_dbm": -67, "ping_ms": 28 },
+      "village-b": { "status": "NORMAL", "battery_v": 52.7, "load_a": 18.5, "irradiance_raw": 760, "temp_c": 31.8, "pv_voltage": 127.2, "pv_current": 12.1, "ac_out_v": 229.9, "ac_freq": 50.0, "cell_delta_mv": 11, "bms_status": "FLOAT_CHARGE", "rssi_dbm": -70, "ping_ms": 30 },
+      "community-hub-1": { "status": "NORMAL", "battery_v": 53.6, "load_a": 40.2, "irradiance_raw": 840, "temp_c": 34.5, "pv_voltage": 139.8, "pv_current": 22.8, "ac_out_v": 229.8, "ac_freq": 50.0, "cell_delta_mv": 8, "bms_status": "FLOAT_CHARGE", "rssi_dbm": -60, "ping_ms": 20 }
+    },
+    {
+      "step": 12,
+      "village-a": { "status": "WARNING", "battery_v": 49.1, "load_a": 41.0, "irradiance_raw": 450, "temp_c": 44.2, "pv_voltage": 105.0, "pv_current": 8.5, "ac_out_v": 228.2, "ac_freq": 49.7, "cell_delta_mv": 32, "bms_status": "THERMAL_THROTTLE", "rssi_dbm": -69, "ping_ms": 32 },
+      "village-b": { "status": "NORMAL", "battery_v": 52.4, "load_a": 19.8, "irradiance_raw": 710, "temp_c": 32.5, "pv_voltage": 124.5, "pv_current": 11.2, "ac_out_v": 229.8, "ac_freq": 50.0, "cell_delta_mv": 12, "bms_status": "DISCHARGING", "rssi_dbm": -72, "ping_ms": 33 },
+      "community-hub-1": { "status": "NORMAL", "battery_v": 53.3, "load_a": 42.0, "irradiance_raw": 800, "temp_c": 35.2, "pv_voltage": 138.0, "pv_current": 21.5, "ac_out_v": 229.7, "ac_freq": 49.9, "cell_delta_mv": 9, "bms_status": "FLOAT_CHARGE", "rssi_dbm": -58, "ping_ms": 18 }
+    },
+    {
+      "step": 13,
+      "village-a": { "status": "WARNING", "battery_v": 48.2, "load_a": 45.2, "irradiance_raw": 380, "temp_c": 49.8, "pv_voltage": 98.4, "pv_current": 6.8, "ac_out_v": 227.4, "ac_freq": 49.6, "cell_delta_mv": 41, "bms_status": "THERMAL_THROTTLE", "rssi_dbm": -71, "ping_ms": 35 },
+      "village-b": { "status": "NORMAL", "battery_v": 52.0, "load_a": 21.0, "irradiance_raw": 670, "temp_c": 33.1, "pv_voltage": 121.8, "pv_current": 10.3, "ac_out_v": 229.6, "ac_freq": 49.9, "cell_delta_mv": 13, "bms_status": "DISCHARGING", "rssi_dbm": -71, "ping_ms": 31 },
+      "community-hub-1": { "status": "NORMAL", "battery_v": 53.0, "load_a": 43.5, "irradiance_raw": 760, "temp_c": 36.0, "pv_voltage": 135.5, "pv_current": 20.1, "ac_out_v": 229.5, "ac_freq": 49.9, "cell_delta_mv": 10, "bms_status": "DISCHARGING", "rssi_dbm": -59, "ping_ms": 19 }
+    },
+    {
+      "step": 14,
+      "village-a": { "status": "WARNING", "battery_v": 47.5, "load_a": 48.0, "irradiance_raw": 320, "temp_c": 54.1, "pv_voltage": 91.0, "pv_current": 5.2, "ac_out_v": 226.5, "ac_freq": 49.5, "cell_delta_mv": 55, "bms_status": "THERMAL_THROTTLE", "rssi_dbm": -72, "ping_ms": 38 },
+      "village-b": { "status": "NORMAL", "battery_v": 51.6, "load_a": 22.5, "irradiance_raw": 620, "temp_c": 33.8, "pv_voltage": 119.0, "pv_current": 9.4, "ac_out_v": 229.4, "ac_freq": 49.9, "cell_delta_mv": 14, "bms_status": "DISCHARGING", "rssi_dbm": -73, "ping_ms": 34 },
+      "community-hub-1": { "status": "NORMAL", "battery_v": 52.6, "load_a": 45.0, "irradiance_raw": 720, "temp_c": 36.8, "pv_voltage": 133.0, "pv_current": 18.8, "ac_out_v": 229.3, "ac_freq": 49.8, "cell_delta_mv": 11, "bms_status": "DISCHARGING", "rssi_dbm": -60, "ping_ms": 20 }
+    },
+    {
+      "step": 15,
+      "village-a": { "status": "WARNING", "battery_v": 46.8, "load_a": 50.4, "irradiance_raw": 280, "temp_c": 58.6, "pv_voltage": 84.5, "pv_current": 4.1, "ac_out_v": 225.8, "ac_freq": 49.4, "cell_delta_mv": 68, "bms_status": "THERMAL_THROTTLE", "rssi_dbm": -74, "ping_ms": 42 },
+      "village-b": { "status": "NORMAL", "battery_v": 51.2, "load_a": 23.8, "irradiance_raw": 580, "temp_c": 34.5, "pv_voltage": 116.2, "pv_current": 8.6, "ac_out_v": 229.2, "ac_freq": 49.8, "cell_delta_mv": 15, "bms_status": "DISCHARGING", "rssi_dbm": -74, "ping_ms": 36 },
+      "community-hub-1": { "status": "NORMAL", "battery_v": 52.2, "load_a": 46.8, "irradiance_raw": 680, "temp_c": 37.5, "pv_voltage": 130.5, "pv_current": 17.5, "ac_out_v": 229.0, "ac_freq": 49.8, "cell_delta_mv": 12, "bms_status": "DISCHARGING", "rssi_dbm": -61, "ping_ms": 22 }
+    },
+    {
+      "step": 16,
+      "village-a": { "status": "WARNING", "battery_v": 46.1, "load_a": 52.1, "irradiance_raw": 240, "temp_c": 61.2, "pv_voltage": 78.0, "pv_current": 3.2, "ac_out_v": 224.9, "ac_freq": 49.2, "cell_delta_mv": 82, "bms_status": "THERMAL_THROTTLE", "rssi_dbm": -75, "ping_ms": 45 },
+      "village-b": { "status": "NORMAL", "battery_v": 50.8, "load_a": 25.0, "irradiance_raw": 540, "temp_c": 35.1, "pv_voltage": 113.8, "pv_current": 7.8, "ac_out_v": 229.0, "ac_freq": 49.8, "cell_delta_mv": 16, "bms_status": "DISCHARGING", "rssi_dbm": -75, "ping_ms": 38 },
+      "community-hub-1": { "status": "NORMAL", "battery_v": 51.8, "load_a": 48.0, "irradiance_raw": 640, "temp_c": 38.2, "pv_voltage": 128.0, "pv_current": 16.2, "ac_out_v": 228.8, "ac_freq": 49.7, "cell_delta_mv": 13, "bms_status": "DISCHARGING", "rssi_dbm": -62, "ping_ms": 23 }
+    },
+    {
+      "step": 17,
+      "village-a": { "status": "WARNING", "battery_v": 45.3, "load_a": 53.8, "irradiance_raw": 210, "temp_c": 63.8, "pv_voltage": 72.4, "pv_current": 2.5, "ac_out_v": 224.0, "ac_freq": 49.0, "cell_delta_mv": 98, "bms_status": "THERMAL_THROTTLE", "rssi_dbm": -76, "ping_ms": 48 },
+      "village-b": { "status": "NORMAL", "battery_v": 50.4, "load_a": 26.2, "irradiance_raw": 500, "temp_c": 35.8, "pv_voltage": 111.0, "pv_current": 7.1, "ac_out_v": 228.8, "ac_freq": 49.7, "cell_delta_mv": 18, "bms_status": "DISCHARGING", "rssi_dbm": -76, "ping_ms": 40 },
+      "community-hub-1": { "status": "NORMAL", "battery_v": 51.4, "load_a": 49.5, "irradiance_raw": 600, "temp_c": 39.0, "pv_voltage": 125.5, "pv_current": 15.0, "ac_out_v": 228.5, "ac_freq": 49.7, "cell_delta_mv": 14, "bms_status": "DISCHARGING", "rssi_dbm": -63, "ping_ms": 25 }
+    },
+    {
+      "step": 18,
+      "village-a": { "status": "WARNING", "battery_v": 44.8, "load_a": 55.0, "irradiance_raw": 190, "temp_c": 65.5, "pv_voltage": 66.0, "pv_current": 1.9, "ac_out_v": 223.1, "ac_freq": 48.8, "cell_delta_mv": 115, "bms_status": "THERMAL_THROTTLE", "rssi_dbm": -78, "ping_ms": 52 },
+      "village-b": { "status": "NORMAL", "battery_v": 50.0, "load_a": 27.5, "irradiance_raw": 470, "temp_c": 36.4, "pv_voltage": 108.5, "pv_current": 6.5, "ac_out_v": 228.5, "ac_freq": 49.6, "cell_delta_mv": 20, "bms_status": "DISCHARGING", "rssi_dbm": -77, "ping_ms": 42 },
+      "community-hub-1": { "status": "NORMAL", "battery_v": 51.0, "load_a": 51.0, "irradiance_raw": 560, "temp_c": 39.8, "pv_voltage": 123.0, "pv_current": 13.8, "ac_out_v": 228.2, "ac_freq": 49.6, "cell_delta_mv": 15, "bms_status": "DISCHARGING", "rssi_dbm": -64, "ping_ms": 27 }
+    },
+    {
+      "step": 19,
+      "village-a": { "status": "WARNING", "battery_v": 44.2, "load_a": 56.2, "irradiance_raw": 170, "temp_c": 67.1, "pv_voltage": 60.5, "pv_current": 1.4, "ac_out_v": 222.0, "ac_freq": 48.5, "cell_delta_mv": 132, "bms_status": "THERMAL_THROTTLE", "rssi_dbm": -80, "ping_ms": 58 },
+      "village-b": { "status": "NORMAL", "battery_v": 49.6, "load_a": 28.4, "irradiance_raw": 440, "temp_c": 37.0, "pv_voltage": 106.0, "pv_current": 5.9, "ac_out_v": 228.2, "ac_freq": 49.6, "cell_delta_mv": 22, "bms_status": "DISCHARGING", "rssi_dbm": -78, "ping_ms": 44 },
+      "community-hub-1": { "status": "NORMAL", "battery_v": 50.5, "load_a": 52.2, "irradiance_raw": 530, "temp_c": 40.5, "pv_voltage": 120.2, "pv_current": 12.5, "ac_out_v": 228.0, "ac_freq": 49.5, "cell_delta_mv": 17, "bms_status": "DISCHARGING", "rssi_dbm": -65, "ping_ms": 29 }
+    },
+    {
+      "step": 20,
+      "village-a": { "status": "FAULT", "battery_v": 43.5, "load_a": 57.5, "irradiance_raw": 150, "temp_c": 68.4, "pv_voltage": 54.0, "pv_current": 0.9, "ac_out_v": 218.4, "ac_freq": 47.9, "cell_delta_mv": 158, "bms_status": "BMS_TRIPPED", "rssi_dbm": -82, "ping_ms": 65 },
+      "village-b": { "status": "NORMAL", "battery_v": 49.2, "load_a": 29.1, "irradiance_raw": 420, "temp_c": 37.6, "pv_voltage": 103.5, "pv_current": 5.4, "ac_out_v": 228.0, "ac_freq": 49.5, "cell_delta_mv": 25, "bms_status": "DISCHARGING", "rssi_dbm": -79, "ping_ms": 46 },
+      "community-hub-1": { "status": "NORMAL", "battery_v": 50.1, "load_a": 53.5, "irradiance_raw": 500, "temp_c": 41.2, "pv_voltage": 118.0, "pv_current": 11.2, "ac_out_v": 227.8, "ac_freq": 49.5, "cell_delta_mv": 19, "bms_status": "DISCHARGING", "rssi_dbm": -66, "ping_ms": 31 }
+    },
+    {
+      "step": 21,
+      "village-a": { "status": "FAULT", "battery_v": 42.1, "load_a": 58.8, "irradiance_raw": 140, "temp_c": 69.8, "pv_voltage": 48.0, "pv_current": 0.5, "ac_out_v": 215.0, "ac_freq": 47.5, "cell_delta_mv": 184, "bms_status": "BMS_TRIPPED", "rssi_dbm": -85, "ping_ms": 78 },
+      "village-b": { "status": "WARNING", "battery_v": 48.5, "load_a": 34.0, "irradiance_raw": 390, "temp_c": 39.2, "pv_voltage": 99.0, "pv_current": 4.5, "ac_out_v": 227.4, "ac_freq": 49.4, "cell_delta_mv": 31, "bms_status": "THERMAL_THROTTLE", "rssi_dbm": -80, "ping_ms": 49 },
+      "community-hub-1": { "status": "NORMAL", "battery_v": 49.8, "load_a": 55.0, "irradiance_raw": 480, "temp_c": 42.0, "pv_voltage": 115.5, "pv_current": 10.1, "ac_out_v": 227.5, "ac_freq": 49.4, "cell_delta_mv": 21, "bms_status": "DISCHARGING", "rssi_dbm": -67, "ping_ms": 33 }
+    },
+    {
+      "step": 22,
+      "village-a": { "status": "FAULT", "battery_v": 42.4, "load_a": 12.0, "irradiance_raw": 220, "temp_c": 67.2, "pv_voltage": 65.0, "pv_current": 1.8, "ac_out_v": 226.0, "ac_freq": 49.1, "cell_delta_mv": 160, "bms_status": "BMS_TRIPPED", "rssi_dbm": -81, "ping_ms": 62 },
+      "village-b": { "status": "WARNING", "battery_v": 48.0, "load_a": 36.2, "irradiance_raw": 410, "temp_c": 40.8, "pv_voltage": 96.2, "pv_current": 4.8, "ac_out_v": 227.0, "ac_freq": 49.3, "cell_delta_mv": 38, "bms_status": "THERMAL_THROTTLE", "rssi_dbm": -81, "ping_ms": 52 },
+      "community-hub-1": { "status": "NORMAL", "battery_v": 49.5, "load_a": 56.2, "irradiance_raw": 510, "temp_c": 42.8, "pv_voltage": 113.0, "pv_current": 10.8, "ac_out_v": 227.2, "ac_freq": 49.4, "cell_delta_mv": 23, "bms_status": "DISCHARGING", "rssi_dbm": -68, "ping_ms": 35 }
+    },
+    {
+      "step": 23,
+      "village-a": { "status": "FAULT", "battery_v": 43.2, "load_a": 10.5, "irradiance_raw": 340, "temp_c": 63.5, "pv_voltage": 82.0, "pv_current": 3.4, "ac_out_v": 227.5, "ac_freq": 49.5, "cell_delta_mv": 135, "bms_status": "BMS_TRIPPED", "rssi_dbm": -77, "ping_ms": 52 },
+      "village-b": { "status": "WARNING", "battery_v": 47.6, "load_a": 38.0, "irradiance_raw": 450, "temp_c": 42.1, "pv_voltage": 94.0, "pv_current": 5.4, "ac_out_v": 226.8, "ac_freq": 49.2, "cell_delta_mv": 45, "bms_status": "THERMAL_THROTTLE", "rssi_dbm": -79, "ping_ms": 47 },
+      "community-hub-1": { "status": "NORMAL", "battery_v": 49.2, "load_a": 57.5, "irradiance_raw": 550, "temp_c": 43.5, "pv_voltage": 111.0, "pv_current": 11.9, "ac_out_v": 227.0, "ac_freq": 49.3, "cell_delta_mv": 25, "bms_status": "DISCHARGING", "rssi_dbm": -66, "ping_ms": 32 }
+    },
+    {
+      "step": 24,
+      "village-a": { "status": "WARNING", "battery_v": 44.5, "load_a": 9.8, "irradiance_raw": 480, "temp_c": 58.2, "pv_voltage": 96.0, "pv_current": 5.8, "ac_out_v": 228.4, "ac_freq": 49.7, "cell_delta_mv": 110, "bms_status": "THERMAL_THROTTLE", "rssi_dbm": -73, "ping_ms": 42 },
+      "village-b": { "status": "WARNING", "battery_v": 47.1, "load_a": 39.5, "irradiance_raw": 500, "temp_c": 43.4, "pv_voltage": 92.5, "pv_current": 6.2, "ac_out_v": 226.5, "ac_freq": 49.1, "cell_delta_mv": 52, "bms_status": "THERMAL_THROTTLE", "rssi_dbm": -78, "ping_ms": 44 },
+      "community-hub-1": { "status": "NORMAL", "battery_v": 49.0, "load_a": 58.0, "irradiance_raw": 600, "temp_c": 44.2, "pv_voltage": 109.5, "pv_current": 13.2, "ac_out_v": 226.8, "ac_freq": 49.2, "cell_delta_mv": 28, "bms_status": "DISCHARGING", "rssi_dbm": -65, "ping_ms": 30 }
+    },
+    {
+      "step": 25,
+      "village-a": { "status": "WARNING", "battery_v": 45.8, "load_a": 9.2, "irradiance_raw": 610, "temp_c": 52.4, "pv_voltage": 108.0, "pv_current": 8.4, "ac_out_v": 229.0, "ac_freq": 49.8, "cell_delta_mv": 85, "bms_status": "THERMAL_THROTTLE", "rssi_dbm": -70, "ping_ms": 35 },
+      "village-b": { "status": "WARNING", "battery_v": 47.8, "load_a": 25.0, "irradiance_raw": 580, "temp_c": 41.5, "pv_voltage": 102.0, "pv_current": 7.8, "ac_out_v": 228.0, "ac_freq": 49.5, "cell_delta_mv": 42, "bms_status": "THERMAL_THROTTLE", "rssi_dbm": -75, "ping_ms": 39 },
+      "community-hub-1": { "status": "NORMAL", "battery_v": 49.4, "load_a": 48.0, "irradiance_raw": 660, "temp_c": 43.1, "pv_voltage": 114.0, "pv_current": 15.1, "ac_out_v": 228.0, "ac_freq": 49.5, "cell_delta_mv": 24, "bms_status": "DISCHARGING", "rssi_dbm": -63, "ping_ms": 26 }
+    },
+    {
+      "step": 26,
+      "village-a": { "status": "WARNING", "battery_v": 47.2, "load_a": 8.8, "irradiance_raw": 720, "temp_c": 46.8, "pv_voltage": 116.5, "pv_current": 11.2, "ac_out_v": 229.5, "ac_freq": 49.9, "cell_delta_mv": 62, "bms_status": "BULK_CHARGE", "rssi_dbm": -68, "ping_ms": 30 },
+      "village-b": { "status": "NORMAL", "battery_v": 48.9, "load_a": 18.0, "irradiance_raw": 650, "temp_c": 38.5, "pv_voltage": 111.5, "pv_current": 9.5, "ac_out_v": 229.0, "ac_freq": 49.8, "cell_delta_mv": 30, "bms_status": "BULK_CHARGE", "rssi_dbm": -72, "ping_ms": 33 },
+      "community-hub-1": { "status": "NORMAL", "battery_v": 50.1, "load_a": 38.0, "irradiance_raw": 730, "temp_c": 41.5, "pv_voltage": 121.0, "pv_current": 17.8, "ac_out_v": 229.0, "ac_freq": 49.8, "cell_delta_mv": 19, "bms_status": "BULK_CHARGE", "rssi_dbm": -61, "ping_ms": 22 }
+    },
+    {
+      "step": 27,
+      "village-a": { "status": "NORMAL", "battery_v": 48.5, "load_a": 8.5, "irradiance_raw": 810, "temp_c": 42.1, "pv_voltage": 122.0, "pv_current": 14.1, "ac_out_v": 230.0, "ac_freq": 50.0, "cell_delta_mv": 44, "bms_status": "BULK_CHARGE", "rssi_dbm": -66, "ping_ms": 26 },
+      "village-b": { "status": "NORMAL", "battery_v": 50.0, "load_a": 15.2, "irradiance_raw": 740, "temp_c": 35.8, "pv_voltage": 118.0, "pv_current": 11.5, "ac_out_v": 229.8, "ac_freq": 50.0, "cell_delta_mv": 22, "bms_status": "BULK_CHARGE", "rssi_dbm": -70, "ping_ms": 29 },
+      "community-hub-1": { "status": "NORMAL", "battery_v": 51.0, "load_a": 32.0, "irradiance_raw": 800, "temp_c": 39.5, "pv_voltage": 127.5, "pv_current": 20.4, "ac_out_v": 229.8, "ac_freq": 50.0, "cell_delta_mv": 14, "bms_status": "BULK_CHARGE", "rssi_dbm": -59, "ping_ms": 19 }
+    },
+    {
+      "step": 28,
+      "village-a": { "status": "NORMAL", "battery_v": 49.8, "load_a": 8.5, "irradiance_raw": 880, "temp_c": 38.5, "pv_voltage": 126.5, "pv_current": 16.5, "ac_out_v": 230.1, "ac_freq": 50.0, "cell_delta_mv": 31, "bms_status": "BULK_CHARGE", "rssi_dbm": -64, "ping_ms": 23 },
+      "village-b": { "status": "NORMAL", "battery_v": 51.0, "load_a": 13.8, "irradiance_raw": 810, "temp_c": 33.2, "pv_voltage": 123.5, "pv_current": 13.0, "ac_out_v": 230.1, "ac_freq": 50.0, "cell_delta_mv": 16, "bms_status": "BULK_CHARGE", "rssi_dbm": -68, "ping_ms": 26 },
+      "community-hub-1": { "status": "NORMAL", "battery_v": 52.0, "load_a": 28.5, "irradiance_raw": 860, "temp_c": 37.2, "pv_voltage": 133.0, "pv_current": 22.8, "ac_out_v": 230.1, "ac_freq": 50.0, "cell_delta_mv": 10, "bms_status": "BULK_CHARGE", "rssi_dbm": -58, "ping_ms": 17 }
+    },
+    {
+      "step": 29,
+      "village-a": { "status": "NORMAL", "battery_v": 50.9, "load_a": 9.0, "irradiance_raw": 920, "temp_c": 35.4, "pv_voltage": 129.8, "pv_current": 18.2, "ac_out_v": 230.2, "ac_freq": 50.0, "cell_delta_mv": 21, "bms_status": "BULK_CHARGE", "rssi_dbm": -63, "ping_ms": 21 },
+      "village-b": { "status": "NORMAL", "battery_v": 51.8, "load_a": 12.5, "irradiance_raw": 860, "temp_c": 31.0, "pv_voltage": 126.8, "pv_current": 14.2, "ac_out_v": 230.2, "ac_freq": 50.0, "cell_delta_mv": 12, "bms_status": "BULK_CHARGE", "rssi_dbm": -66, "ping_ms": 24 },
+      "community-hub-1": { "status": "NORMAL", "battery_v": 52.8, "load_a": 26.0, "irradiance_raw": 900, "temp_c": 35.0, "pv_voltage": 137.5, "pv_current": 24.5, "ac_out_v": 230.3, "ac_freq": 50.0, "cell_delta_mv": 8, "bms_status": "FLOAT_CHARGE", "rssi_dbm": -56, "ping_ms": 15 }
+    },
+    {
+      "step": 30,
+      "village-a": { "status": "NORMAL", "battery_v": 51.8, "load_a": 10.2, "irradiance_raw": 940, "temp_c": 33.1, "pv_voltage": 132.0, "pv_current": 19.5, "ac_out_v": 230.1, "ac_freq": 50.0, "cell_delta_mv": 15, "bms_status": "FLOAT_CHARGE", "rssi_dbm": -62, "ping_ms": 20 },
+      "village-b": { "status": "NORMAL", "battery_v": 52.4, "load_a": 11.5, "irradiance_raw": 890, "temp_c": 29.5, "pv_voltage": 128.9, "pv_current": 15.0, "ac_out_v": 230.1, "ac_freq": 50.0, "cell_delta_mv": 9, "bms_status": "FLOAT_CHARGE", "rssi_dbm": -65, "ping_ms": 22 },
+      "community-hub-1": { "status": "NORMAL", "battery_v": 53.4, "load_a": 24.5, "irradiance_raw": 930, "temp_c": 33.4, "pv_voltage": 140.0, "pv_current": 25.8, "ac_out_v": 230.2, "ac_freq": 50.0, "cell_delta_mv": 6, "bms_status": "FLOAT_CHARGE", "rssi_dbm": -55, "ping_ms": 14 }
+    }
+  ]
+}
