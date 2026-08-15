@@ -24,44 +24,47 @@ export const AnimatedBackground: React.FC = () => {
 
     window.addEventListener('resize', handleResize);
 
-    // Wave parameters
+    // Wave parameters - Vivid, high-visibility energy waveforms
     let step = 0;
     const waveLayers = [
       {
-        frequency: 0.008,
-        amplitude: 45,
-        speed: 0.015,
-        offsetY: 0.45,
-        color: 'rgba(16, 185, 129, 0.12)',
-        glow: 'rgba(16, 185, 129, 0.3)',
-        lineWidth: 2.5
-      },
-      {
-        frequency: 0.006,
-        amplitude: 65,
-        speed: 0.01,
-        offsetY: 0.55,
-        color: 'rgba(6, 182, 212, 0.1)',
-        glow: 'rgba(6, 182, 212, 0.25)',
-        lineWidth: 2.0
-      },
-      {
-        frequency: 0.012,
-        amplitude: 35,
+        frequency: 0.007,
+        amplitude: 60,
         speed: 0.02,
-        offsetY: 0.65,
-        color: 'rgba(59, 130, 246, 0.08)',
-        glow: 'rgba(59, 130, 246, 0.2)',
-        lineWidth: 1.5
+        offsetY: 0.35,
+        strokeColor: 'rgba(16, 185, 129, 0.65)',
+        glowColor: 'rgba(16, 185, 129, 0.9)',
+        fillColor: 'rgba(16, 185, 129, 0.04)',
+        lineWidth: 3.5
+      },
+      {
+        frequency: 0.005,
+        amplitude: 85,
+        speed: 0.014,
+        offsetY: 0.55,
+        strokeColor: 'rgba(6, 182, 212, 0.6)',
+        glowColor: 'rgba(6, 182, 212, 0.85)',
+        fillColor: 'rgba(6, 182, 212, 0.03)',
+        lineWidth: 3.0
+      },
+      {
+        frequency: 0.009,
+        amplitude: 45,
+        speed: 0.025,
+        offsetY: 0.75,
+        strokeColor: 'rgba(59, 130, 246, 0.55)',
+        glowColor: 'rgba(59, 130, 246, 0.8)',
+        fillColor: 'rgba(59, 130, 246, 0.03)',
+        lineWidth: 2.5
       }
     ];
 
-    // Floating energy sparks riding the waves
-    const sparkCount = 20;
+    // Vivid energy sparks riding wave lines
+    const sparkCount = 30;
     const sparks = Array.from({ length: sparkCount }, () => ({
       x: Math.random() * width,
-      speed: 0.8 + Math.random() * 1.5,
-      radius: 1.5 + Math.random() * 2,
+      speed: 1.2 + Math.random() * 2.2,
+      radius: 3 + Math.random() * 3,
       layerIdx: Math.floor(Math.random() * waveLayers.length)
     }));
 
@@ -69,13 +72,33 @@ export const AnimatedBackground: React.FC = () => {
       ctx.clearRect(0, 0, width, height);
       step += 1;
 
-      // 1. Draw Flowing Electrical Wave Layers
+      // 1. Draw Vivid Wave Layers with Filled Gradients & Glow
       waveLayers.forEach((wave) => {
-        ctx.beginPath();
         const baseCenterY = height * wave.offsetY;
 
-        for (let x = 0; x <= width; x += 4) {
-          const y = baseCenterY + Math.sin(x * wave.frequency + step * wave.speed) * wave.amplitude + Math.cos(x * 0.003 + step * 0.005) * 15;
+        ctx.beginPath();
+        ctx.moveTo(0, height);
+
+        for (let x = 0; x <= width; x += 3) {
+          const y = baseCenterY + Math.sin(x * wave.frequency + step * wave.speed) * wave.amplitude + Math.cos(x * 0.002 + step * 0.008) * 20;
+          if (x === 0) {
+            ctx.lineTo(x, y);
+          } else {
+            ctx.lineTo(x, y);
+          }
+        }
+
+        ctx.lineTo(width, height);
+        ctx.closePath();
+
+        // Fill below wave
+        ctx.fillStyle = wave.fillColor;
+        ctx.fill();
+
+        // Draw Wave Stroke Line
+        ctx.beginPath();
+        for (let x = 0; x <= width; x += 3) {
+          const y = baseCenterY + Math.sin(x * wave.frequency + step * wave.speed) * wave.amplitude + Math.cos(x * 0.002 + step * 0.008) * 20;
           if (x === 0) {
             ctx.moveTo(x, y);
           } else {
@@ -83,28 +106,28 @@ export const AnimatedBackground: React.FC = () => {
           }
         }
 
-        ctx.strokeStyle = wave.color;
+        ctx.strokeStyle = wave.strokeColor;
         ctx.lineWidth = wave.lineWidth;
-        ctx.shadowColor = wave.glow;
-        ctx.shadowBlur = 12;
+        ctx.shadowColor = wave.glowColor;
+        ctx.shadowBlur = 18;
         ctx.stroke();
         ctx.shadowBlur = 0;
       });
 
-      // 2. Draw Particles Riding Wave Lines
+      // 2. Draw Bright Glowing Sparks Travelling Across Waves
       sparks.forEach((spark) => {
         spark.x += spark.speed;
         if (spark.x > width) spark.x = -10;
 
         const wave = waveLayers[spark.layerIdx];
         const baseCenterY = height * wave.offsetY;
-        const sparkY = baseCenterY + Math.sin(spark.x * wave.frequency + step * wave.speed) * wave.amplitude;
+        const sparkY = baseCenterY + Math.sin(spark.x * wave.frequency + step * wave.speed) * wave.amplitude + Math.cos(spark.x * 0.002 + step * 0.008) * 20;
 
         ctx.beginPath();
         ctx.arc(spark.x, sparkY, spark.radius, 0, Math.PI * 2);
-        ctx.fillStyle = '#10b981';
+        ctx.fillStyle = '#6ee7b7';
         ctx.shadowColor = '#10b981';
-        ctx.shadowBlur = 15;
+        ctx.shadowBlur = 20;
         ctx.fill();
         ctx.shadowBlur = 0;
       });
@@ -123,7 +146,7 @@ export const AnimatedBackground: React.FC = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0 opacity-90"
+      className="fixed inset-0 pointer-events-none z-0 opacity-100"
     />
   );
 };
