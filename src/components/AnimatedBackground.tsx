@@ -26,30 +26,30 @@ export const AnimatedBackground: React.FC = () => {
 
     // 3D Dark Silk Ribbon Wave Parameters (Matching Reference Image)
     let step = 0;
-    const ribbonCount = 9;
+    const ribbonCount = 10;
 
     const render = () => {
       ctx.clearRect(0, 0, width, height);
-      step += 0.008;
+      step += 0.009;
 
-      // Deep void background base
-      ctx.fillStyle = '#05070d';
+      // Dark obsidian background base
+      ctx.fillStyle = '#05070e';
       ctx.fillRect(0, 0, width, height);
 
-      // Draw multi-layered 3D obsidian silk ribbons
+      // Render 3D silk ribbons flowing diagonally from top right to bottom left (Matching Image)
       for (let i = 0; i < ribbonCount; i++) {
         const offsetPct = i / ribbonCount;
-        const baseY = height * (0.25 + offsetPct * 0.55);
-        const waveAmp = 50 + i * 8;
-        const freq = 0.003 - i * 0.00015;
-        const phase = step + i * 0.4;
+        const baseY = height * (0.15 + offsetPct * 0.65);
+        const waveAmp = 65 + i * 10;
+        const freq = 0.0028 - i * 0.00012;
+        const phase = step + i * 0.35;
 
+        // Draw Ribbon Body
         ctx.beginPath();
         ctx.moveTo(0, height);
 
-        // Render smooth 3D bezier ribbon curve
-        for (let x = 0; x <= width; x += 10) {
-          const y = baseY + Math.sin(x * freq + phase) * waveAmp + Math.cos(x * 0.0015 + step * 0.6 + i) * 25;
+        for (let x = 0; x <= width; x += 8) {
+          const y = baseY + Math.sin(x * freq + phase) * waveAmp + Math.cos(x * 0.0018 + step * 0.5 + i) * 30;
           if (x === 0) {
             ctx.lineTo(x, y);
           } else {
@@ -60,19 +60,20 @@ export const AnimatedBackground: React.FC = () => {
         ctx.lineTo(width, height);
         ctx.closePath();
 
-        // 3D Ribbon Shadow Fill (Obsidian / Dark Slate gradient)
+        // 3D Gradient Shading: Dark slate to deep obsidian shadow
         const fillGrad = ctx.createLinearGradient(0, baseY - waveAmp, 0, height);
-        const baseShade = Math.floor(12 + i * 4); // #0c101d to #20293d
-        fillGrad.addColorStop(0, `rgb(${baseShade + 8}, ${baseShade + 12}, ${baseShade + 20})`);
-        fillGrad.addColorStop(0.4, `rgb(${baseShade}, ${baseShade + 4}, ${baseShade + 10})`);
-        fillGrad.addColorStop(1, '#05070d');
+        const lightShade = Math.floor(25 + i * 6); // Metallic slate gradient
+        const darkShade = Math.floor(10 + i * 2);
+        fillGrad.addColorStop(0, `rgb(${lightShade + 15}, ${lightShade + 22}, ${lightShade + 32})`);
+        fillGrad.addColorStop(0.3, `rgb(${lightShade}, ${lightShade + 5}, ${lightShade + 12})`);
+        fillGrad.addColorStop(1, `rgb(${darkShade}, ${darkShade + 2}, ${darkShade + 6})`);
         ctx.fillStyle = fillGrad;
         ctx.fill();
 
-        // Crisp Top-Edge Highlight Line (Silver / Subtle Emerald Specular Highlight)
+        // Specular Edge Highlight Stroke (Bright Metallic Silver / Emerald Rim Lighting)
         ctx.beginPath();
-        for (let x = 0; x <= width; x += 10) {
-          const y = baseY + Math.sin(x * freq + phase) * waveAmp + Math.cos(x * 0.0015 + step * 0.6 + i) * 25;
+        for (let x = 0; x <= width; x += 8) {
+          const y = baseY + Math.sin(x * freq + phase) * waveAmp + Math.cos(x * 0.0018 + step * 0.5 + i) * 30;
           if (x === 0) {
             ctx.moveTo(x, y);
           } else {
@@ -80,20 +81,21 @@ export const AnimatedBackground: React.FC = () => {
           }
         }
 
-        const highlightAlpha = Math.max(0.08, 0.45 - i * 0.04);
-        
-        // Front ribbons get a subtle emerald energy sheen
+        const highlightAlpha = Math.max(0.2, 0.75 - i * 0.05);
+
         if (i === 3 || i === 4) {
-          ctx.strokeStyle = `rgba(16, 185, 129, ${highlightAlpha * 0.7})`;
+          // Highlight active energy wave with subtle glowing emerald rim
+          ctx.strokeStyle = `rgba(52, 211, 153, ${highlightAlpha})`;
           ctx.shadowColor = '#10b981';
-          ctx.shadowBlur = 12;
+          ctx.shadowBlur = 16;
         } else {
-          ctx.strokeStyle = `rgba(226, 232, 240, ${highlightAlpha})`;
-          ctx.shadowColor = '#94a3b8';
-          ctx.shadowBlur = 6;
+          // Pure metallic silver ribbon crest highlight (Matching reference photo)
+          ctx.strokeStyle = `rgba(241, 245, 249, ${highlightAlpha})`;
+          ctx.shadowColor = '#cbd5e1';
+          ctx.shadowBlur = 8;
         }
 
-        ctx.lineWidth = i === 0 ? 1.5 : 2.2 - i * 0.15;
+        ctx.lineWidth = 2.8 - i * 0.18;
         ctx.stroke();
         ctx.shadowBlur = 0;
       }
@@ -110,9 +112,11 @@ export const AnimatedBackground: React.FC = () => {
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0 opacity-100"
-    />
+    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+      <canvas
+        ref={canvasRef}
+        className="w-full h-full block"
+      />
+    </div>
   );
 };
