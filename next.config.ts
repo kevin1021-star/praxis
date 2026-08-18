@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Disable automatic generation of AGENTS.md / CLAUDE.md metadata files
+  agentRules: false,
 };
 
 export default nextConfig;
