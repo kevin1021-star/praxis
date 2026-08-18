@@ -1,6 +1,6 @@
 # 🏆 SMART INDIA HACKATHON 2026 — OFFICIAL IDEA SUBMISSION SLIDE DECK
 **Problem Statement 4:** Real-Time Renewable Energy Microgrid Monitoring System  
-**PS Category:** Hardware | **Team Name:** Apex Focus
+**PS Category:** Hardware | **Team Name:** Praxis
 
 ---
 
@@ -12,7 +12,7 @@
 * **Theme-** Renewable & Sustainable Energy / IoT Smart Automation
 * **PS Category- Software/Hardware:** Hardware
 * **Team ID-** [Team ID]
-* **Team Name (Registered on portal):** Apex Focus
+* **Team Name (Registered on portal):** Praxis
 
 ---
 

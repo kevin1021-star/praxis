@@ -1,7 +1,7 @@
 # ⚡ GridPulse — Real-Time Renewable Energy Microgrid Monitoring System
 
 > **Smart India Hackathon 2026 Project** | **Problem Statement 4 (Hardware Category)**  
-> **Built by Team Apex Focus**
+> **Built by Team Praxis**
 
 GridPulse is a real-time monitoring and predictive management system for solar microgrids built specifically for off-grid and rural installations. Our team built this project to solve critical reliability issues in remote microgrids by combining physical ESP32 sensor hardware, local MCU safety interlocks, and a real-time Next.js web dashboard.
 
@@ -93,7 +93,7 @@ GridPulse solves this with **3-Tier Real-Time Intelligence**:
 
 ---
 
-## 👥 Team Apex Focus
+## 👥 Team Praxis
 Built with ❤️ for **Smart India Hackathon 2026 (PS 4)**.
 
 * **Repository:** [https://github.com/kevin1021-star/praxis](https://github.com/kevin1021-star/praxis)
